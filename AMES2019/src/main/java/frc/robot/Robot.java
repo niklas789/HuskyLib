@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.biblioteca.roboBaseClass;
+import frc.robot.subsystem.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,6 +25,14 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  private Joystick m_HelmStick;//controls robot motion
+  private Joystick m_ControlsStick;//controls robot actions
+
+  private Drive m_Drive;
+  private Intake m_IntakeSmall;
+  private Intake m_IntakeLarge;
+  private Winch m_Winch;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -45,6 +55,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    roboBaseClass.gatherInfoAll();
+    roboBaseClass.doActionsAll();
   }
 
   /**
@@ -86,6 +98,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    m_Drive.setForward(m_HelmStick.getRawAxis());
+    m_Drive.setTwist();
   }
 
   /**
