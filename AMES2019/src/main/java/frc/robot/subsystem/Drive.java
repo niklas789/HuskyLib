@@ -16,6 +16,8 @@ abstract class Drive extends roboBaseClass {
         super();
     }
     @Override
+    abstract public void doActions();
+    @Override
     abstract public void gatherInfo();
     public void setForward(double forward) {
         m_forward = forward;
@@ -44,6 +46,4 @@ abstract class Drive extends roboBaseClass {
     public double getRotVel(){
         return m_rotVel;   
     }
-    @Override
-    abstract public void doActions();
 }
