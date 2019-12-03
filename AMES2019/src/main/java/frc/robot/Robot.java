@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.biblioteca.roboBaseClass;
+import frc.robot.biblioteca.SimpleTankDrive;
 import frc.robot.subsystem.*;
 
 /**
@@ -29,7 +30,7 @@ public class Robot extends TimedRobot {
   private Joystick m_HelmStick;//controls robot motion
   private Joystick m_ControlsStick;//controls robot actions
 
-  private Drive m_Drive;
+  private SimpleTankDrive m_Drive;
   private Intake m_IntakeSmall;
   private Intake m_IntakeLarge;
   private Winch m_Winch;
