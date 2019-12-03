@@ -19,7 +19,6 @@ class SimpleTankDrve extends Drive{
     driveInv = 1;
     super();
   }
-  @Overide
   public void invertTwist(boolean twist);
     if(twist == true){
       twistInv = -1;
@@ -34,6 +33,7 @@ class SimpleTankDrve extends Drive{
       driveInv = 1; 
     }
   }
+  @Overide
   public void gatherInfo(){}
   @Override
   public void doActions(){
