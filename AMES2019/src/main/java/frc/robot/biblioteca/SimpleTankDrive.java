@@ -17,6 +17,7 @@ class SimpleTankDrve extends Drive{
     m_rightSlave.follow(m_rightMaster);
     m_leftSlave.follow(m_leftMaster);
     driveInv = 1;
+    twistInv = 1;
     super();
   }
   public void invertTwist(boolean twist);
