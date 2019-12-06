@@ -1,12 +1,12 @@
 package frc.robot.subsystem;
-import frc.robot.biblioteca.roboBaseClass;
+import frc.robot.biblioteca.*;
 
 class Winch extends roboBaseClass {
-    public TalonSRX winchMotor;
+    public talonSRX winchMotor;
     private double speed;
     public Winch(int winchMotorPort) {
-        winchMotor = new TalonSRX(winchMotorPort);
         super();
+        winchMotor = new talonSRX(winchMotorPort);
     }
     @Override
     public void gatherInfo() {

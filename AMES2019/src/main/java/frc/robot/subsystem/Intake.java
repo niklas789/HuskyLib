@@ -1,13 +1,13 @@
 package frc.robot.subsystem;
-import frc.robot.biblioteca.roboBaseClass;
+import frc.robot.biblioteca.*;
 
 class Intake extends roboBaseClass {
-    public VictorSPX m_motor;
+    public victorSPX m_motor;
     private double m_speed;
-    public Drive(int motorPort) {
-        m_motor = new VictorSPX(motorPort);
-        speed = 0;
+    public Intake(int motorPort) {
         super();
+        m_motor = new victorSPX(motorPort);
+        m_speed = 0;
     }
     @Override
     public void gatherInfo() {
