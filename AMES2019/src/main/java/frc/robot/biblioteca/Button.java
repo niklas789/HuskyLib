@@ -1,8 +1,8 @@
 package frc.robot.biblioteca;
-import frc.robot.biblioteca.digitalInput;
+import frc.robot.biblioteca.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class button extends digitalInput {
+public class Button extends DigitalInput {
     private int m_port;
     private DigitalInput m_b;
     public button(int port) {
