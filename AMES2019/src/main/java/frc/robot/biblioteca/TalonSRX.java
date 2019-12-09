@@ -1,6 +1,6 @@
 package frc.robot.biblioteca;
 import frc.robot.biblioteca.*;
-public class talonSRX extends motor {
+public class TalonSRX extends Motor {
     public talonSRX(int port) {
         super(port);
     }
