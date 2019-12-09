@@ -7,7 +7,7 @@ class Motor extends AnalogOutput {
     public void set(double value) {
 
     }
-    public void follow(motor Motor) {
+    public void follow(Motor motor) {
 
     }
 }
