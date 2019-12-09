@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Button extends DigitalInput {
     private int m_port;
     private DigitalInput m_b;
-    public button(int port) {
+    public Button(int port) {
         super(false);
         m_port = port;
         m_b = new DigitalInput(port);
