@@ -1,8 +1,8 @@
 package frc.robot.biblioteca;
 import java.util.ArrayList;
-public class roboBaseClass {
+public class RoboBaseClass {
     private static ArrayList<roboBaseClass> allParts = new ArrayList<roboBaseClass>();
-    public roboBaseClass() {
+    public RoboBaseClass() {
         roboBaseClass.addPart(this);
     }
     public void gatherInfo() {};
