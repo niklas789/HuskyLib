@@ -1,11 +1,11 @@
 package frc.robot.biblioteca;
-import frc.robot.biblioteca.roboBaseClass;
+import frc.robot.biblioteca.RoboBaseClass;
 
-class analogInput extends roboBaseClass {
+class AnalogInput extends RoboBaseClass {
     private double m_currentValue;
     private double m_maxValue = 1;
     private double m_minValue = -1;
-    public analogInput(double max, double min) {
+    public AnalogInput(double max, double min) {
         super();
         m_maxValue = max;
         m_minValue = min;
