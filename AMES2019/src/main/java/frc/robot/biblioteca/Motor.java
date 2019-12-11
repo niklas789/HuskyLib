@@ -10,7 +10,7 @@ class Motor extends AnalogOutput {
         m_Speed = value;
     }
     public void follow(Motor motor) {
-
+        
     }
     public double getTargetSpeed(){
         return m_speed;
