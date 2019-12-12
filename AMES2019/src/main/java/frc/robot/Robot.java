@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.RobotConstants;
 
@@ -24,10 +26,12 @@ import frc.robot.RobotConstants;
  * project.
  */
 public class Robot extends TimedRobot {
+  Solenoid piston;
   TalonSRX rightMaster;
   TalonSRX leftMaster;
   VictorSPX rightSlave;
   VictorSPX leftSlave;
+  Compressor airCompressor;
   public boolean leftInvert = false;
   public boolean rightInvert = false;
   Joystick driveControl;
@@ -39,6 +43,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    piston = new Solenoid(0);
+    airCompressor = new Compressor();
     driveControl = new Joystick(0);
     rightMaster = new TalonSRX(RobotConstants.rightMasterPort);
     leftMaster = new TalonSRX(RobotConstants.leftMasterPort);
@@ -91,7 +97,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-
+    airCompressor.start();
+    piston.set(true);
   }
 
   /**
@@ -99,6 +106,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    piston.set(driveControl.getRawButton(11));
+    airCompressor.start();
     rightMaster.set(ControlMode.PercentOutput, (driveControl.getRawAxis(RobotConstants.forwardAxis) - driveControl.getRawAxis(RobotConstants.twistAxis)));
     leftMaster.set(ControlMode.PercentOutput, (driveControl.getRawAxis(RobotConstants.forwardAxis) + driveControl.getRawAxis(RobotConstants.twistAxis)));
   }
