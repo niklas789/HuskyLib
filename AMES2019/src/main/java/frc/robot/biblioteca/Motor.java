@@ -3,7 +3,7 @@ import frc.robot.biblioteca.*;
 class Motor extends AnalogOutput {
     private double m_speed;
     private double m_realSpeed;
-    public Motor(int port) {
+    public Motor() {
         super(1, -1);
     }
     public void set(double value) {
