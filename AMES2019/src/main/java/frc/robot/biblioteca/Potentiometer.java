@@ -1,11 +1,11 @@
 package frc.robot.biblioteca;
-import frc.robot.biblioteca.analogInput;
+import frc.robot.biblioteca.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
-public class potentiometer extends analogInput {
+public class Potentiometer extends AnalogInput {
     private int m_port;
     private AnalogPotentiometer m_p;
-    public potentiometer(int port) {
+    public Potentiometer(int port) {
         super(-1, 1);
         m_port = port;
         m_p = new AnalogPotentiometer(port);

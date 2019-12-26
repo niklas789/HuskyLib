@@ -8,11 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.biblioteca.roboBaseClass;
-import frc.robot.biblioteca.SimpleTankDrive;
-import frc.robot.subsystem.*;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.RobotController;
+import frc.robot.RobotConstants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,18 +26,16 @@ import frc.robot.subsystem.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  Solenoid piston;
+  TalonSRX rightMaster;
+  TalonSRX leftMaster;
+  VictorSPX rightSlave;
+  VictorSPX leftSlave;
+  Compressor airCompressor;
+  public boolean leftInvert = false;
+  public boolean rightInvert = false;
+  Joystick driveControl;
 
-  private Joystick m_HelmStick;//controls robot motion
-  private Joystick m_ControlsStick;//controls robot actions
-
-  private SimpleTankDrive m_Drive;
-  private Intake m_IntakeSmall;
-  private Intake m_IntakeLarge;
-  private Winch m_Winch;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -41,10 +43,25 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_drive = new SimpleTankDrive(0, 0, 0, 0);
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    piston = new Solenoid(0);
+    airCompressor = new Compressor();
+    driveControl = new Joystick(0);
+    rightMaster = new TalonSRX(RobotConstants.rightMasterPort);
+    leftMaster = new TalonSRX(RobotConstants.leftMasterPort);
+    rightSlave = new VictorSPX(RobotConstants.rightSlavePort);
+    leftSlave = new VictorSPX(RobotConstants.leftSlavePort);
+    if(rightInvert == true){
+      rightMaster.setInverted(true);
+    }else{
+      rightSlave.setInverted(false);
+    }
+    if(leftInvert == true){
+      leftMaster.setInverted(true);
+    }else{
+      leftSlave.setInverted(true);
+    }
+      leftSlave.follow(leftMaster);
+      rightSlave.follow(rightMaster);
   }
 
   /**
@@ -57,8 +74,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    roboBaseClass.gatherInfoAll();
-    roboBaseClass.doActionsAll();
   }
 
   /**
@@ -74,9 +89,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+
   }
 
   /**
@@ -84,15 +97,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
-    }
+    airCompressor.start();
+    piston.set(true);
   }
 
   /**
@@ -100,8 +106,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    m_Drive.setForward(m_HelmStick.getRawAxis());
-    m_Drive.setTwist();
+    piston.set(driveControl.getRawButton(11));
+    airCompressor.start();
+    rightMaster.set(ControlMode.PercentOutput, (driveControl.getRawAxis(RobotConstants.forwardAxis) - driveControl.getRawAxis(RobotConstants.twistAxis)));
+    leftMaster.set(ControlMode.PercentOutput, (driveControl.getRawAxis(RobotConstants.forwardAxis) + driveControl.getRawAxis(RobotConstants.twistAxis)));
   }
 
   /**

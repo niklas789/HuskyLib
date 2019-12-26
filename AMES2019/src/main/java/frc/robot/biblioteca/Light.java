@@ -1,11 +1,11 @@
 package frc.robot.biblioteca;
-import frc.robot.biblioteca.digitalOutput;
+import frc.robot.biblioteca.DigitalOutput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 
-public class light extends digitalOutput {
+public class Light extends DigitalOutput {
     private int m_port;
     private DigitalOutput m_l;
-    public light(int port) {
+    public Light(int port) {
         super(false);
         m_port = port;
         m_l = new DigitalOutput(port);

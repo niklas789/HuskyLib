@@ -3,14 +3,14 @@ import frc.robot.biblioteca.roboBaseClass;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 abstract class Drive extends roboBaseClass {
-    private double m_forward;
-    private double m_twist;
-    private double m_strafe;
+    protected double m_forward;
+    protected double m_twist;
+    protected double m_strafe;
     private double m_xVel;
     private double m_yVel;
     private double m_heading;
     private double m_xLoc;
-    private double m_Yloc;
+    private double m_yLoc;
     private double m_rotVel;
     public Drive() {
         super();

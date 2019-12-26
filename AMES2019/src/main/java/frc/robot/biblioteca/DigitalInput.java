@@ -1,9 +1,9 @@
 package frc.robot.biblioteca;
-import frc.robot.biblioteca.roboBaseClass;
+import frc.robot.biblioteca.RoboBaseClass;
 
-class digitalInput extends roboBaseClass {
+class DigitalInput extends RoboBaseClass {
     private boolean m_currentValue;
-    public digitalInput(boolean initValue) {
+    public DigitalInput(boolean initValue) {
         super();
         m_currentValue = initValue;
     }
