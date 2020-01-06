@@ -8,14 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-
+import frc.robot.biblioteca.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.RobotConstants;
 
 /**
@@ -29,92 +27,61 @@ public class Robot extends TimedRobot {
   Solenoid piston;
   TalonSRX rightMaster;
   TalonSRX leftMaster;
+  //TalonSRX largeIntake;
+  //TalonSRX smallIntake;
   VictorSPX rightSlave;
   VictorSPX leftSlave;
   Compressor airCompressor;
-  public boolean leftInvert = false;
-  public boolean rightInvert = false;
-  Joystick driveControl;
+  HuskyJoystick driveControl;
 
-
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
   @Override
   public void robotInit() {
-    piston = new Solenoid(0);
+    piston = new Solenoid(RobotConstants.defensePistonPort);
     airCompressor = new Compressor();
-    driveControl = new Joystick(0);
+    driveControl = new HuskyJoystick(RobotConstants.joystickNumber);
+    driveControl.setDeadZone(RobotConstants.joystickDeadZone);
+    //Motors
     rightMaster = new TalonSRX(RobotConstants.rightMasterPort);
     leftMaster = new TalonSRX(RobotConstants.leftMasterPort);
     rightSlave = new VictorSPX(RobotConstants.rightSlavePort);
     leftSlave = new VictorSPX(RobotConstants.leftSlavePort);
-    if(rightInvert == true){
-      rightMaster.setInverted(true);
-    }else{
-      rightSlave.setInverted(false);
-    }
-    if(leftInvert == true){
-      leftMaster.setInverted(true);
-    }else{
-      leftSlave.setInverted(true);
-    }
-      leftSlave.follow(leftMaster);
-      rightSlave.follow(rightMaster);
-  }
+    //largeIntake = new TalonSRX(RobotConstants.largeIntakePort);
+    //smallIntake = new TalonSRX(RobotConstants.largeIntakePort);
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
-   */
+    rightMaster.setInverted(RobotConstants.rightInvert);
+    leftMaster.setInverted(RobotConstants.leftInvert);
+    leftSlave.follow(leftMaster);
+    rightSlave.follow(rightMaster);
+    //largeIntake.setInverted(RobotConstants.largeInvert);
+    //smallIntake.setInverted(RobotConstants.smallInvert);
+  }
   @Override
   public void robotPeriodic() {
   }
-
-  /**
-   * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString line to get the auto name from the text box below the Gyro
-   *
-   * <p>You can add additional auto modes by adding additional comparisons to
-   * the switch structure below with additional strings. If using the
-   * SendableChooser make sure to add them to the chooser code above as well.
-   */
   @Override
   public void autonomousInit() {
 
   }
-
-  /**
-   * This function is called periodically during autonomous.
-   */
   @Override
   public void autonomousPeriodic() {
     airCompressor.start();
     piston.set(true);
   }
-
-  /**
-   * This function is called periodically during operator control.
-   */
   @Override
   public void teleopPeriodic() {
-    piston.set(driveControl.getRawButton(11));
+    piston.set(driveControl.getButton(RobotConstants.pistonButton));
     airCompressor.start();
-    rightMaster.set(ControlMode.PercentOutput, (driveControl.getRawAxis(RobotConstants.forwardAxis) - driveControl.getRawAxis(RobotConstants.twistAxis)));
-    leftMaster.set(ControlMode.PercentOutput, (driveControl.getRawAxis(RobotConstants.forwardAxis) + driveControl.getRawAxis(RobotConstants.twistAxis)));
+    rightMaster.set(ControlMode.PercentOutput, (driveControl.getAxis(RobotConstants.forwardAxis) - driveControl.getAxis(RobotConstants.twistAxis)));
+    leftMaster.set(ControlMode.PercentOutput, (driveControl.getAxis(RobotConstants.forwardAxis) + driveControl.getAxis(RobotConstants.twistAxis)));
+    
+    /*if(driveControl.getButton(RobotConstants.largeIntakeButton)) {
+      largeIntake.set(ControlMode.PercentOutput, RobotConstants.largeIntakeSpeed);
+    }
+    if(driveControl.getButton(RobotConstants.smallIntakeButton)) {
+      smallIntake.set(ControlMode.PercentOutput, RobotConstants.smallIntakeSpeed);
+    }*/
+    
   }
-
-  /**
-   * This function is called periodically during test mode.
-   */
   @Override
   public void testPeriodic() {
   }

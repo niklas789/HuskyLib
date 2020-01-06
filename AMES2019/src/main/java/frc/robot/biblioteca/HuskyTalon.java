@@ -1,13 +1,15 @@
 package frc.robot.biblioteca;
-import frc.robot.biblioteca.*;
 import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public class HuskyTalon extends Motor {
-    public HuskyTalon(int port) {
-        super(port);
-        TalonsSRX talon = new TalonSRX(port);
+    TalonSRX talon;
+    public HuskyTalon(final int port) {
+        talon = new TalonSRX(port);
     }
-    @Overide
-    public void set(double speed){
-        talon.set(speed);
+
+    @Override
+    public void doActions(){
+        talon.set(ControlMode.PercentOutput, this.getTargetSpeed());
     }
 }

@@ -1,12 +1,14 @@
 package frc.robot.subsystem;
 import frc.robot.biblioteca.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-class Intake extends roboBaseClass {
-    public victorSPX m_motor;
+class Intake extends RoboBaseClass {
+    public VictorSPX m_motor;
     private double m_speed;
     public Intake(int motorPort) {
         super();
-        m_motor = new victorSPX(motorPort);
+        m_motor = new VictorSPX(motorPort);
         m_speed = 0;
     }
     @Override
@@ -18,6 +20,6 @@ class Intake extends roboBaseClass {
     }
     @Override
     public void doActions() {
-        m_motor.set(m_speed);
+        m_motor.set(ControlMode.PercentOutput, m_speed);
     }
 }

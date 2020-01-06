@@ -2,11 +2,11 @@ package frc.robot.biblioteca;
 import frc.robot.biblioteca.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 
-public class Encoder {
+public class HuskyEncoder extends AnalogInput{
     private int m_port1;
     private int m_port2;
     private Encoder m_encoder;
-    public Encoder(int port1, int port2, double distancePerPulse) {
+    public HuskyEncoder(int port1, int port2, double distancePerPulse) {
         super(-1, 1);
         m_port1 = port1;
         m_port2 = port2;
@@ -16,14 +16,14 @@ public class Encoder {
     public void reset() {
         m_encoder.reset();
     }
-    public int getCount() {
+    /*public int getCount() {
         return (m_encoder.getCount());
-    }
+    }*/
     public boolean getDirection() {
         return (m_encoder.getDirection());
     }
     public double getDistance(){
-        return (m_encoder.getDistance()));
+        return (m_encoder.getDistance());
     }
     public double getDistancePerPulse(){
         return (m_encoder.getDistancePerPulse());

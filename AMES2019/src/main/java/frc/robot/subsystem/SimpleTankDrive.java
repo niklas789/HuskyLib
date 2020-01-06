@@ -3,18 +3,18 @@ import frc.robot.subsystem.Drive;
 import frc.robot.biblioteca.*;
 
 public class SimpleTankDrive extends Drive{
-  private talonSRX m_leftMaster;
-  private talonSRX m_leftSlave;
-  private talonSRX m_rightMaster;
-  private talonSRX m_rightSlave;
+  private HuskyTalon m_leftMaster;
+  private HuskyVictor m_leftSlave;
+  private HuskyTalon m_rightMaster;
+  private HuskyVictor m_rightSlave;
   int twistInv;
   int driveInv;
   public SimpleTankDrive(int leftMasterPort, int leftSlavePort, int rightMasterPort, int rightSlavePort){
     super();
-    m_leftMaster = new talonSRX(leftMasterPort);
-    m_leftSlave = new talonSRX(leftSlavePort);
-    m_rightMaster = new talonSRX(rightMasterPort);
-    m_rightSlave = new talonSRX(rightSlavePort);
+    m_leftMaster = new HuskyTalon(leftMasterPort);
+    m_leftSlave = new HuskyVictor(leftSlavePort);
+    m_rightMaster = new HuskyTalon(rightMasterPort);
+    m_rightSlave = new HuskyVictor(rightSlavePort);
     m_rightSlave.follow(m_rightMaster);
     m_leftSlave.follow(m_leftMaster);
     driveInv = 1;
