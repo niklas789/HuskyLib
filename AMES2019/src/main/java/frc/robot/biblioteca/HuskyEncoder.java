@@ -34,9 +34,6 @@ public class HuskyEncoder extends AnalogInput{
     public int getFPGAIndex(){
         return (m_encoder.getFPGAIndex());
     }
-    public double getPeriod(){
-        return (m_encoder.getPeriod());
-    }
     public double getRate(){
         return (m_encoder.getRate());
     }

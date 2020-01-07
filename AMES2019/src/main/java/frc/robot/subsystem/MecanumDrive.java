@@ -2,15 +2,12 @@ package frc.robot.subsystem;
 import frc.robot.subsystem.Drive;
 import frc.robot.biblioteca.Motor;
 
-public class Mecanum extends Drive{
+public class MecanumDrive extends Drive{
     private Motor m_frontLeft;
     private Motor m_frontRight;
     private Motor m_backLeft;
     private Motor m_backRight;
-    private double forwardInvert;
-    private double turnInvert;
-    private double strafeInvert;
-    public Mecanum(Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight){
+    public MecanumDrive(Motor frontLeft, Motor frontRight, Motor backLeft, Motor backRight){
         super();
         m_frontLeft = frontLeft;
         m_frontRight = frontRight;
