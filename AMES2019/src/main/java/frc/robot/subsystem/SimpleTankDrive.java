@@ -9,6 +9,8 @@ public class SimpleTankDrive extends Drive{
   private HuskyVictor m_rightSlave;
   int twistInv;
   int driveInv;
+  int invertRight;
+  int invertLeft;
   public SimpleTankDrive(int leftMasterPort, int leftSlavePort, int rightMasterPort, int rightSlavePort){
     super();
     m_leftMaster = new HuskyTalon(leftMasterPort);
@@ -19,6 +21,8 @@ public class SimpleTankDrive extends Drive{
     m_leftSlave.follow(m_leftMaster);
     driveInv = 1;
     twistInv = 1;
+    invertLeft = 1;
+    invertRight = 1;
   }
   public void invertTwist(boolean twist) {
     if(twist == true){
@@ -34,11 +38,31 @@ public class SimpleTankDrive extends Drive{
       driveInv = 1; 
     }
   }
+  public void invertLeft(boolean inv){
+    if(inv){
+      invertLeft = -1;
+    }else{
+      invertLeft = 1;
+    }
+  }
+  public void invertRight(boolean inv){
+    if(inv){
+      invertRight = -1;
+    }else{
+      invertRight = 1;
+    }
+  }
+  public void fightingLeft(boolean boo){
+    m_leftSlave.setInverted(boo);
+  }
+  public void fightingRight(boolean boo){
+    m_rightSlave.setInverted(boo);
+  }
   @Override
   public void gatherInfo(){}
   @Override
   public void doActions(){
-    m_leftMaster.set((m_forward * driveInv) - (m_twist * twistInv));
-    m_rightMaster.set((m_forward * driveInv) + (m_twist * twistInv));
+    m_leftMaster.set(((m_forward * driveInv) - (m_twist * twistInv)) * invertLeft);
+    m_rightMaster.set(((m_forward * driveInv) + (m_twist * twistInv)) * invertRight);
   }
 }
