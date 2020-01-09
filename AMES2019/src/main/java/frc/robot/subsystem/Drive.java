@@ -1,8 +1,7 @@
 package frc.robot.subsystem;
-import frc.robot.biblioteca.roboBaseClass;
-import com.ctre.phoenix.motorcontrol.can.*;
+import frc.robot.biblioteca.RoboBaseClass;
 
-abstract class Drive extends roboBaseClass {
+abstract class Drive extends RoboBaseClass {
     protected double m_forward;
     protected double m_twist;
     protected double m_strafe;
@@ -12,6 +11,9 @@ abstract class Drive extends roboBaseClass {
     private double m_xLoc;
     private double m_yLoc;
     private double m_rotVel;
+    private boolean m_invertForward;
+    private boolean m_invertStrafe;
+    private boolean m_invertTwist;
     public Drive() {
         super();
     }
@@ -20,13 +22,25 @@ abstract class Drive extends roboBaseClass {
     @Override
     abstract public void gatherInfo();
     public void setForward(double forward) {
-        m_forward = forward;
+        if(m_invertForward){
+            m_forward = -forward;
+        }else{
+            m_forward = forward;
+        }
     }
     public void setTwist(double twist) {
-        m_twist = twist;
+        if(m_invertTwist){
+            m_twist = -twist;
+        }else{
+            m_twist = twist;
+        }
     }
     public void setStrafe(double strafe){
-        m_strafe = strafe;
+        if(m_invertStrafe){
+            m_strafe = -strafe;
+        }else{
+            m_strafe = strafe;
+        }
     }
     public double getxLoc(){
         return m_xLoc;   
@@ -46,4 +60,14 @@ abstract class Drive extends roboBaseClass {
     public double getRotVel(){
         return m_rotVel;   
     }
+    public void invertTwist(boolean twist){
+        m_invertTwist = twist;
+    }
+    public void invertStrafe(boolean strafe){
+        m_invertStrafe = strafe;
+    }
+    public void invertForward(boolean forward){
+        m_invertForward = forward;
+    }
+
 }

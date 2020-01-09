@@ -1,9 +1,9 @@
 package frc.robot.biblioteca;
 import frc.robot.biblioteca.RoboBaseClass;
 
-class DigitalInput extends RoboBaseClass {
+class HuskyDigIn extends RoboBaseClass {
     private boolean m_currentValue;
-    public DigitalInput(boolean initValue) {
+    public HuskyDigIn(boolean initValue) {
         super();
         m_currentValue = initValue;
     }

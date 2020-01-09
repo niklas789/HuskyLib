@@ -13,5 +13,8 @@ public class Potentiometer extends AnalogInput {
     @Override
     public void gatherInfo() {
         setValue(m_p.get());
-    };
+    }
+    public int getPort(){
+        return m_port;
+    }
 }

@@ -33,4 +33,8 @@ class AnalogOutput extends RoboBaseClass {
     public void setMin(double min) {
         m_minValue = min;
     }
+    @Override
+    public void gatherInfo(){}
+    @Override
+    public void doActions(){}
 }

@@ -1,4 +1,4 @@
-package frc.robot.biblioteca;
+/*package frc.robot.biblioteca;
 import frc.robot.biblioteca.DigitalOutput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 
@@ -14,4 +14,4 @@ public class Light extends DigitalOutput {
     public void doActions() {
         m_l.set(getValue());
     }
-}
+}*/
