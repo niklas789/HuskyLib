@@ -23,14 +23,14 @@ public class MecanumDrive extends Drive{
     private double getSpeed(boolean isLeft, boolean isLeftGrain){
         double totalSpeed = m_forward;
         if(isLeft){
-            totalSpeed =- m_twist;
+            totalSpeed -= m_twist;
         }else{
-            totalSpeed =+ m_twist;
+            totalSpeed += m_twist;
         }
         if(isLeftGrain){
-            totalSpeed =- m_strafe;
+            totalSpeed -= m_strafe;
         }else{
-            totalSpeed =+ m_strafe;
+            totalSpeed += m_strafe;
         }
         return totalSpeed;
     }
