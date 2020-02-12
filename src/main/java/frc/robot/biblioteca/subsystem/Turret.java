@@ -1,4 +1,4 @@
-package frc.robot.subsystem;
+package frc.robot.biblioteca.subsystem;
 import frc.robot.biblioteca.RoboBaseClass;
 //import PID;
 //import math;
@@ -35,10 +35,10 @@ abstract class Turret extends RoboBaseClass {
     return m_currentAngleY;
   }
   public void setTargetX(double x) {
-    m_targetAngleX = max(min(x, m_xMax), m_xMin);//limit input to -360 and 360
+    m_targetAngleX = Math.max(Math.min(x, m_xMax), m_xMin);//limit input to -360 and 360
   }
   public void setTargetY(double y) {
-    m_targetAngleY = max(min(x, m_yMax), m_yMin);//limit input to -360 and 360
+    m_targetAngleY = Math.max(Math.min(y, m_yMax), m_yMin);//limit input to -360 and 360
   }
   protected void setCurrentX(double x) {
     m_currentAngleX = x;

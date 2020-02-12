@@ -1,15 +1,14 @@
-package frc.robot.subsystem;
+package frc.robot.biblioteca.subsystem;
+import frc.robot.biblioteca.HuskyVector2D;
 import frc.robot.biblioteca.RoboBaseClass;
 
-abstract class Drive extends RoboBaseClass {
+public abstract class Drive extends RoboBaseClass {
     protected double m_forward;
     protected double m_twist;
     protected double m_strafe;
-    private double m_xVel;
-    private double m_yVel;
+    private HuskyVector2D m_vel;
     private double m_heading;
-    private double m_xLoc;
-    private double m_yLoc;
+    private HuskyVector2D m_loc;
     private double m_rotVel;
     private boolean m_invertForward;
     private boolean m_invertStrafe;
@@ -42,17 +41,11 @@ abstract class Drive extends RoboBaseClass {
             m_strafe = strafe;
         }
     }
-    public double getxLoc(){
-        return m_xLoc;   
+    public HuskyVector2D getLoc(){
+        return m_loc;
     }
-    public double getyLoc(){
-        return m_yLoc;   
-    }
-    public double getxVel(){
-        return m_xVel; 
-    }
-    public double getyVel(){
-        return m_yVel;   
+    public HuskyVector2D getVel(){
+        return m_vel;
     }
     public double getHeading(){
         return m_heading;   
