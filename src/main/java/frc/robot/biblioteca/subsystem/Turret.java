@@ -3,7 +3,7 @@ import frc.robot.biblioteca.RoboBaseClass;
 //import PID;
 //import math;
 
-abstract class Turret extends RoboBaseClass {
+public abstract class Turret extends RoboBaseClass {
   private double m_currentAngleX = 0;
   private double m_targetAngleX = 0;
   private double m_currentAngleY = 0;
