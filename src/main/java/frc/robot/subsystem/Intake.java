@@ -9,13 +9,14 @@ import frc.robot.biblioteca.Motor;;
 public class Intake extends RoboBaseClass {
     private int totalIn;
     private boolean up;
-    
-    public Intake() {
+    private Motor m_intakeMotor;
+    private Solenoid m_piston;
+    public Intake(Motor intakeMotor, Solenoid piston){
           //instantiate motor, solenoid, and lightsensor
           //Hopefully makes sense. hopeful it's not completely bad
            super();
-          // Motor intakeMotor;
-          //  Solenoid piston
+           m_intakeMotor = new VictorSPX();
+           m_piston = new Solenoid();
     }
     public void gatherInfo() {
         //check if the light sensor senses things
@@ -25,11 +26,10 @@ public class Intake extends RoboBaseClass {
     public void doActions() {
     }
     public void intake(double speed) {
-      
-        intakeMotor.set(speed);
+      m_intakeMotor.set(speed);
     }
     public void activatePiston(boolean up) {
-        piston.set(up);
+        m_piston.set(up);
     }
     public int getTotalIn() {
         return totalIn;
