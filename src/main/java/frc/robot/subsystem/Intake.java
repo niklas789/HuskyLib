@@ -9,12 +9,13 @@ import frc.robot.biblioteca.Motor;;
 public class Intake extends RoboBaseClass {
     private int totalIn;
     private boolean up;
+    
     public Intake() {
           //instantiate motor, solenoid, and lightsensor
           //Hopefully makes sense. hopeful it's not completely bad
            super();
-           //hopefully something like this piston = new Solenoid();  
-           //hopefully something like Motor intake = new HuskyVictor();
+          // Motor intakeMotor;
+          //  Solenoid piston
     }
     public void gatherInfo() {
         //check if the light sensor senses things
