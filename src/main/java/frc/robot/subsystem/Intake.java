@@ -15,8 +15,8 @@ public class Intake extends RoboBaseClass {
           //instantiate motor, solenoid, and lightsensor
           //Hopefully makes sense. hopeful it's not completely bad
            super();
-           m_intakeMotor = new VictorSPX();
-           m_piston = new Solenoid();
+           m_intakeMotor = intakeMotor;
+           m_piston = piston;
     }
     public void gatherInfo() {
         //check if the light sensor senses things
@@ -25,8 +25,8 @@ public class Intake extends RoboBaseClass {
     }
     public void doActions() {
     }
-    public void intake(double speed) {
-      m_intakeMotor.set(speed);
+    public void intake(double speed,Motor intakeMotor) {
+      intakeMotor.set(speed);
     }
     public void activatePiston(boolean up) {
         m_piston.set(up);
